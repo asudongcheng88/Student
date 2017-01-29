@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Login</title>
+
+<style>
+body
+{
+    background: url(image/bg3.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+</style>
+
+<link rel="stylesheet" href="css/login/login.css">
+
+<script type="text/javascript" src="jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" >
+
+$(document).ready(function () {
+	
+    $('.forgot-pass').click(function(event) {
+      $(".pr-wrap").toggleClass("show-pass-reset");
+    }); 
+    
+    $('.pass-reset-submit').click(function(event) {
+      $(".pr-wrap").removeClass("show-pass-reset");
+    });
+    
+    /*
+    $(document).on('click', '#stud-login', function(){
+		
+		$.ajax({
+			
+			type:'GET',
+			dataType:'json',
+			data:{
+				stud_id: $('#stud-id').val(),
+				stud_pass: $('#stud-pass').val()
+			},
+			url:'StudentAuthen',
+			success: function(result){
+				console.log(result);
+				window.location='StudentHome.jsp';
+			}
+			
+		})
+		
+	});//close student log in
+    */
+});
+
+</script>
+</head>
+<body>
+	
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                	<form action="StudentAuthen" method="POST">
+                    
+	                    <input type="text" placeholder="Student ID" name="reg-stud-id" />
+	                    <input type="text" placeholder="Student Name" name="reg-stud-name" />
+	                    <input type="email" placeholder="Email" name="reg-stud-email"/>                
+	                    <input type="text" placeholder="Phone Number" name="reg-stud-phone" />
+	                    <input type="password" placeholder="Password" name="reg-stud-pass" />
+	                    <input type="submit" value="Register" class="pass-reset-submit btn btn-success btn-sm" />
+                    </form>
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                    Sign In</p>
+                <form class="login" action="StudentAuthen" method="GET">
+	                <input type="text" placeholder="Student ID" name="stud-id"/>
+	                <input type="password" placeholder="Password" name="stud-pass"/>
+	                <input type="submit" value="Sign In" class="btn btn-success btn-sm" id="stud-login"/>
+	                <div class="remember-forgot">
+	                    <div class="row">
+	                        <div class="col-md-6">
+	
+	                        </div>
+	                        <div class="col-md-6 forgot-pass-content">
+	                            <a href="javascription:void(0)" class="forgot-pass">Register here</a>
+	                        </div>
+	                    </div>
+	                </div>
+                </form>
+                 <form action="Login.html" align="center">
+					<input type="submit" value="Back">
+				</form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+
+	table, th, td {
+    	border: 1px solid black;
+    	padding : 6px;
+	}
+	
+	table {
+	    border-collapse: collapse;
+	}
+
+</style>
+<script type="text/javascript" src="jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" >
+
+	$(document).ready(function(){
+		
+		var workerArray = [];
+		
+		$('#user-id').val(1);		//initial value of user id    
+			
+		
+		/*--- Event of add button --*/
+		
+		
+		$(document).on('click', '#add-btn', function(){
+			
+			
+			var tr = [];
+			
+			$dropdown = $('#table-container');
+			$dropdown.empty();
+			
+			var userId = $('#user-id').val();
+			var userName = $('#user-name').val();
+			var userOccupation = $('#user-occupation').val();
+			
+			/*
+			 * Create new object everytime user click add button
+			 * Create dynamic table based on workerArray data
+			*/
+			
+			var workerObject = new Object();
+			
+			workerObject["id"] = userId;
+			workerObject["name"] = userName;
+			workerObject["occupation"] = userOccupation;
+			
+			workerArray.push(workerObject);
+			
+			$('#user-id').val(workerArray.length + 1);	
+			$('#user-name').val("");
+			$('#user-occupation').val("");
+			
+			tr.push('<table>');
+			
+			for(var i=0; i<workerArray.length; i++){
+				
+				tr.push('<tr>');
+				tr.push('<td>'+ workerArray[i].id +'</td>');
+				tr.push('<td>'+ workerArray[i].name +'</td>');
+				tr.push('<td>'+ workerArray[i].occupation +'</td>');
+				tr.push('</tr>');
+				
+			}
+			
+			tr.push('</table>');
+			$dropdown.append($(tr.join('')));
+			
+			console.log(workerArray);
+			
+			
+		});
+		
+		
+		/*-- Event of sort option --*/
+		
+		
+		$(document).on('change', '#sort-by', function(){
+			
+			
+			
+			var tr = [];
+			
+			$dropdown = $('#table-container');
+			$dropdown.empty();
+			
+			var selectedOption = $("#sort-by").find("option:selected").text();
+			
+			if(selectedOption === "User ID"){
+				
+				workerArray = workerArray.sort(function(a, b) {
+				    return a.id - b.id;
+				});
+				
+			}else if(selectedOption === "Username"){
+				
+				//sorted by key value
+				
+				workerArray.sort(function(a, b) {
+					  var nameA = a.name.toUpperCase(); 	// ignore upper and lowercase
+					  var nameB = b.name.toUpperCase(); 
+					  if (nameA < nameB) {
+					    return -1;
+					  }
+					  if (nameA > nameB) {
+					    return 1;
+					  }
+
+					  return 0;
+					});
+				
+				
+			}else if(selectedOption === "Occupation"){
+				
+				workerArray.sort(function(a, b) {
+					  var nameA = a.occupation.toUpperCase(); // ignore upper and lowercase
+					  var nameB = b.occupation.toUpperCase(); // ignore upper and lowercase
+					  if (nameA < nameB) {
+					    return -1;
+					  }
+					  if (nameA > nameB) {
+					    return 1;
+					  }
+
+					  return 0;
+					});
+			}
+			
+			tr.push('<table>');
+			
+			for(var i=0; i<workerArray.length; i++){
+				
+				tr.push('<tr>');
+				tr.push('<td>'+ workerArray[i].id +'</td>');
+				tr.push('<td>'+ workerArray[i].name +'</td>');
+				tr.push('<td>'+ workerArray[i].occupation +'</td>');
+				
+			}
+			
+			tr.push('</table>');
+			$dropdown.append($(tr.join('')));
+			
+			
+			
+		});
+		
+		
+		
+	});
+	
+	
+
+</script>
+</head>
+<body>
+	
+	User ID : <br>
+	<input type="text" id="user-id" readonly />
+	<input type="text" id="user-name" placeholder="Username"/>
+	<input type="text" id="user-occupation" placeholder="Occupation"/>
+	<input type="submit" id="add-btn" value="Add" />
+	<br>
+	<p>&nbsp;</p>
+	
+	Sort by : 
+	<select id="sort-by">
+		<option selected>User ID</option>
+		<option>Username</option>
+		<option>Occupation</option>
+	</select>
+	<p>&nbsp;</p>
+	
+	<div id="table-container"></div>
+
+
+
+
+</body>
+</html>

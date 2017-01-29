@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="ISO-8859-1">
+
+<style>
+body
+{
+    background: url(image/bg3.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+</style>
+
+<title>Lecturer Login</title>
+
+<link rel="stylesheet" href="css/login/login.css">
+
+<script type="text/javascript" src="jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" >
+
+$(document).ready(function () {
+	
+    $('.forgot-pass').click(function(event) {
+      $(".pr-wrap").toggleClass("show-pass-reset");
+    }); 
+    
+    $('.pass-reset-submit').click(function(event) {
+      $(".pr-wrap").removeClass("show-pass-reset");
+    });
+    
+    /*
+    $(document).on('click', '#stud-login', function(){
+		
+		$.ajax({
+						type:'GET',
+			dataType:'json',
+			data:{
+				stud_id: $('#stud-id').val(),
+				stud_pass: $('#stud-pass').val()
+			},
+			url:'StudentAuthen',
+			success: function(result){
+				console.log(result);
+				window.location='StudentHome.jsp';
+			}
+			
+		})
+		
+	});//close student log in
+    */
+});
+
+</script>
+</head>
+<body>
+	
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                	<form action="LecturerAuthen" method="POST">
+                    
+	                    <input type="text" placeholder="Lecturer ID" name="reg-lec-id" />
+	                    <input type="text" placeholder="Lecturer Name" name="reg-lec-name" />
+	                    <input type="email" placeholder="Email" name="reg-lec-email"/>                
+	                    <input type="password" placeholder="Password" name="reg-lec-pass" />
+	                    <input type="submit" value="Register" class="pass-reset-submit btn btn-success btn-sm" />
+                    </form>
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                    Sign In</p>
+                <form class="login" action="LecturerAuthen" method="GET">
+	                <input type="text" placeholder="Lecturer ID" name="lec-id"/>
+	                <input type="password" placeholder="Password" name="lec-pass"/>
+	                <input type="submit" value="Sign In" class="btn btn-success btn-sm" id="stud-login"/>
+	                <div class="remember-forgot">
+	                    <div class="row">
+	                        <div class="col-md-6">
+	
+	                        </div>
+	                        <div class="col-md-6 forgot-pass-content">
+	                            <a href="javascription:void(0)" class="forgot-pass">Register here</a>
+	                        </div>
+	                    </div>   
+	                </div>
+                </form>
+                 <form action="Login.html" align="center">
+					<input type="submit" value="Back">
+				</form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
